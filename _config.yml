@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
+title: hilo's blog
+subtitle: 
+description: 我最担心的是，你可能认为我是个好人…
+author: Wenbo Wang
+language: zh-Hans
 timezone:
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: concise
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
