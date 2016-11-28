@@ -82,19 +82,25 @@
 
 
 
-<meta name="description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
-前言1、android.view.View">
+<meta name="description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。
+前言1、android.view.View 
+
+Th">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初探view与viewgroup">
 <meta property="og:url" content="http://wangwenbo.xyz/2016/11/28/初探view与viewgroup/index.html">
 <meta property="og:site_name" content="hilo's blog">
-<meta property="og:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
-前言1、android.view.View">
-<meta property="og:updated_time" content="2016-11-28T10:14:03.824Z">
+<meta property="og:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。
+前言1、android.view.View 
+
+Th">
+<meta property="og:updated_time" content="2016-11-28T10:21:59.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探view与viewgroup">
-<meta name="twitter:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
-前言1、android.view.View">
+<meta name="twitter:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。
+前言1、android.view.View 
+
+Th">
 
 
 
@@ -316,7 +322,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T18:02:21+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T18:17:51+08:00">
                 2016-11-28
               </time>
             
@@ -362,7 +368,7 @@
 
       
         <hr>
-<h2 id="本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。"><a href="#本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。" class="headerlink" title="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。"></a>本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。</h2><hr>
+<h2 id="本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。"><a href="#本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。" class="headerlink" title="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。"></a>本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。</h2><hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>1、android.view.View </p>
 <blockquote>
 <p>The Android framework is responsible for measuring, laying out and drawing views。</p>
@@ -433,53 +439,59 @@
     &lt;/MyRelativeLayout&gt;
 &lt;/MyRootView&gt;
 </code></pre><p><strong>模拟场景1：根据上面的层级关系，我们将所有的view都写成自定义view，为了使每个view触发上面三个方法回调。</strong></p>
-<blockquote>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyLinearLayout: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyButton: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyTextView: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyButton: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyTextView: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyRelativeLayout: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyRootView: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyLinearLayout: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyTextView: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyButton: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyRelativeLayout: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:04:09.834 13672-13672/com.example.w D/MyRootView: onLayout&gt;&gt;&gt;&gt;&gt; </p>
-</blockquote>
+<pre><code>11-28 15:04:09.834 13672-13672/com.example.w D/MyLinearLayout: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyButton: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyTextView: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyButton: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyTextView: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyRelativeLayout: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyRootView: onMeasure&gt;&gt;&gt;&gt;&gt;
+
+11-28 15:04:09.834 13672-13672/com.example.w D/MyLinearLayout: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyTextView: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyButton: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyRelativeLayout: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:04:09.834 13672-13672/com.example.w D/MyRootView: onLayout&gt;&gt;&gt;&gt;&gt; 
+</code></pre><blockquote>
 <ol>
 <li>首先分析一下布局结构，最外层MyRootView下有俩个孩子MyLinearLayout和MyRelativateLayout，他们俩个是平级关系。在MyRelativateLayout下又派生了俩个子View分别是MyTextView和MyButton。</li>
 <li>分析上图Log，会优先触发onMeasure方法，测量控件的大小，首先会先回调rootView的第一个子孩子MyLinearLayout，紧接着并不会先触发与它平级的MyRelativeLayout而是会优先触发它下面的俩个子孩子的onMeasure，且走了俩次（因为RelativeLayout作为父布局的原因），然后在执行自身的onMeasure，最后执行最外层rootView的onMeasure。这时整个onMeasure的测量就完成了。由于各个控件的大小与位置并未发生改变，故并未触发onSizeChanged回调，最后会触发onLayout重新布局，递归也是由子view到父级view的过程。</li>
 </ol>
-<p><strong>模拟场景2：通过MyTextView的点击事件，来隐藏MyButtonView，我们来看看会发生什么？</strong></p>
-<blockquote>
-<p>11-28 15:25:53.994 6808-6808/com.example.w D/MyRelativeLayout: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:25:53.994 6808-6808/com.example.w D/MyRootView: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:25:53.994 6808-6808/com.example.w D/MyRelativeLayout: onSizeChanged&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:25:53.994 6808-6808/com.example.w D/MyRelativeLayout: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:25:53.994 6808-6808/com.example.w D/MyRootView: onLayout&gt;&gt;&gt;&gt;&gt;</p>
 </blockquote>
+<p><strong>模拟场景2：通过MyTextView的点击事件，来隐藏MyButtonView，我们来看看会发生什么？</strong></p>
+<pre><code>11-28 15:25:53.994 6808-6808/com.example.w D/MyRelativeLayout: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:25:53.994 6808-6808/com.example.w D/MyRootView: onMeasure&gt;&gt;&gt;&gt;&gt;
+
+11-28 15:25:53.994 6808-6808/com.example.w D/MyRelativeLayout: onSizeChanged&gt;&gt;&gt;&gt;&gt;
+
+11-28 15:25:53.994 6808-6808/com.example.w D/MyRelativeLayout: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:25:53.994 6808-6808/com.example.w D/MyRootView: onLayout&gt;&gt;&gt;&gt;&gt;
+</code></pre><blockquote>
 <ol>
 <li>当点击MyTextView后，并没有触发MyLinearLayout的任何关于布局回调的3个方法。</li>
 <li>仅触发了rootView以及他的子控件MyRelativeLayout的onMeasure方法，我们在回过头来看看，之前我们提到过什么情况下会触发onMeasure方法呢？<em> <strong>onMeasure方法只有当界面上，放置一个view或者remove掉一个view时才会被触发，还有一种特殊的情况就是将空间visibility属性设为gone。</strong></em></li>
 <li>因为MyRelativeLayout的孩子MyButton被gone掉，会告诉他的父亲我搬家了，不需要再占用你提供给我的空间了。此时他的父级控件MyRelativeLayout会触发onMeasure重新计算下所有的子View占用的空间，这里有一点需要特别注意一下，MyRelativeLayout下面有俩个孩子，分别是MyTextView和MyButton，他们俩个是平级关系，当点击MyTextView让MyButton消失时，影响了几乎在它一条线上的所有的分支，唯独没有影响与她平级的MyTextView分支，<strong><em>是因为在一个分支下很可能会影响一条线的view直到最外层的rootView，同级别的影响先决条件是，改变同级的大小或者位置，但是只会影响在它右侧分支的view</em></strong>，这一点很重要。由于MyTextView在MyButton的左侧，所以无论MyButton怎么变化都不会影响到MyTextView。</li>
 <li>假设在MyTextView和MyButton中间add一个View，那么对MyTextView没有任何影响，只会影响到MyButton控件。仅影响在它右侧分支的view，被影响的view会执行onMeasure和onLayout回调。</li>
 </ol>
-<p><strong>模拟场景3：通过MyTextview的点击事件，来隐藏MyTextView，我们来看看会发生什么？</strong></p>
-<blockquote>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyRelativeLayout: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyRootView: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyRelativeLayout: onSizeChanged&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyButton: onMeasure&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyButton: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyRelativeLayout: onLayout&gt;&gt;&gt;&gt;&gt;</p>
-<p>11-28 15:53:19.894 8601-8601/com.example.w D/MyRootView: onLayout&gt;&gt;&gt;&gt;&gt;</p>
 </blockquote>
+<p><strong>模拟场景3：通过MyTextview的点击事件，来隐藏MyTextView，我们来看看会发生什么？</strong></p>
+<pre><code>11-28 15:53:19.894 8601-8601/com.example.w D/MyRelativeLayout: onMeasure&gt;&gt;&gt;&gt;&gt;
+11-28 15:53:19.894 8601-8601/com.example.w D/MyRootView: onMeasure&gt;&gt;&gt;&gt;&gt;
+
+11-28 15:53:19.894 8601-8601/com.example.w D/MyRelativeLayout: onSizeChanged&gt;&gt;&gt;&gt;&gt;
+
+11-28 15:53:19.894 8601-8601/com.example.w D/MyButton: onMeasure&gt;&gt;&gt;&gt;&gt;
+
+11-28 15:53:19.894 8601-8601/com.example.w D/MyButton: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:53:19.894 8601-8601/com.example.w D/MyRelativeLayout: onLayout&gt;&gt;&gt;&gt;&gt;
+11-28 15:53:19.894 8601-8601/com.example.w D/MyRootView: onLayout&gt;&gt;&gt;&gt;&gt;
+</code></pre><blockquote>
 <ol>
 <li>与上边不同的是，MyTextView的右侧分支存在一个View，当MyTextView彻底消失后，可能会影响到它右侧分支MyButton的位置与大小，因为这里仅仅影响了位置的改变，故只触发了MyButton的onMeasure和onLayout的回调。</li>
 <li>由于MyRelativeLayout的孩子被gone掉，腾出了一些控件，导致父级控件的大小要重新计算，且优先于所有子控件onMeasure，onSizeChanged，onLayout方法之前触发onSizeChanged回调。</li>
 <li>如果父级MyRelativeLayout控件的大小是固定的（SpecMode=”EXACTLY”），意味着空间是固定的，那么不会走父级的onSizeChanged，反而会触发它右侧分支MyButton的onSizeChanged，如果他MyButton也是固定的大小，那么不会触发onSizeChanged回调。</li>
 </ol>
+</blockquote>
 <h2 id="onDraw-android-graphics-Canvas-呈现视图内容"><a href="#onDraw-android-graphics-Canvas-呈现视图内容" class="headerlink" title="onDraw(android.graphics.Canvas) 呈现视图内容"></a>onDraw(android.graphics.Canvas) 呈现视图内容</h2><p><strong>什么时候执行？</strong></p>
 <p>View的onDraw函数虽然是绘制函数，但是此函数只会在View视图一开始创建运行的时候又执行一遍而已。</p>
 <p><strong><em>值得注意的是：</em></strong>如果后续改变了其他内容，则需要调用view.inValidate()或者postInvalidate()方法，前者需要在ui线程里调用，后者需在非ui线程里调用。这样就会触发onDraw()和computeScroll()方法的回调。ViewGroup则需要给他一个背景，因为ViewGroup默认情况下透明的，需在构造函数内手动调用setWillNotDraw(false);将容器透明去掉即可触发onDraw方法回调。因此，一般会直接重写dispatchDraw来绘制viewGroup。自定义一个ViewGroup，dispatchDraw会调用drawChild。</p>
@@ -499,6 +511,7 @@ setMeasureDimension(realWidth, heightVal）;
 </ul>
 <blockquote>
 <p><a href="http://wangwenbo.xyz/2016/11/28/初探view与viewgroup/#more">本文地址</a></p>
+<p><a href="http://wangwenbo.xyz/2016/11/28/初探view与viewgroup/#more">http://wangwenbo.xyz/2016/11/28/初探view与viewgroup/#more</a></p>
 </blockquote>
 <h3 id="著作权归作者所有"><a href="#著作权归作者所有" class="headerlink" title="著作权归作者所有"></a>著作权归作者所有</h3>
       
@@ -633,13 +646,6 @@ setMeasureDimension(realWidth, heightVal）;
           
 
           
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
 
         </nav>
 
@@ -670,7 +676,7 @@ setMeasureDimension(realWidth, heightVal）;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。"><span class="nav-number">1.</span> <span class="nav-text">本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View是怎么呈现在界面上的？"><span class="nav-number">4.</span> <span class="nav-text">View是怎么呈现在界面上的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View绘制过程及3个布局回调"><span class="nav-number">5.</span> <span class="nav-text">View绘制过程及3个布局回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景演示"><span class="nav-number">5.1.</span> <span class="nav-text">场景演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onDraw-android-graphics-Canvas-呈现视图内容"><span class="nav-number">6.</span> <span class="nav-text">onDraw(android.graphics.Canvas) 呈现视图内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#著作权归作者所有"><span class="nav-number">8.1.</span> <span class="nav-text">著作权归作者所有</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。"><span class="nav-number">1.</span> <span class="nav-text">本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解的更深刻一些。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View是怎么呈现在界面上的？"><span class="nav-number">4.</span> <span class="nav-text">View是怎么呈现在界面上的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View绘制过程及3个布局回调"><span class="nav-number">5.</span> <span class="nav-text">View绘制过程及3个布局回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景演示"><span class="nav-number">5.1.</span> <span class="nav-text">场景演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onDraw-android-graphics-Canvas-呈现视图内容"><span class="nav-number">6.</span> <span class="nav-text">onDraw(android.graphics.Canvas) 呈现视图内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#著作权归作者所有"><span class="nav-number">8.1.</span> <span class="nav-text">著作权归作者所有</span></a></li></ol></li></ol></div>
             
 
           </div>
