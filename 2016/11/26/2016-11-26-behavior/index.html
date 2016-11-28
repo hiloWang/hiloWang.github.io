@@ -1,0 +1,915 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。举个例子：
+
+
+snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。
+简书或者知乎app中，当视图上下滚动后，toolbar以及b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Behavior介绍及一些业务场景的应用">
+<meta property="og:url" content="http://wangwenbo.xyz/2016/11/26/2016-11-26-behavior/index.html">
+<meta property="og:site_name" content="hilo's blog">
+<meta property="og:description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。举个例子：
+
+
+snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。
+简书或者知乎app中，当视图上下滚动后，toolbar以及b">
+<meta property="og:updated_time" content="2016-11-28T12:53:12.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Behavior介绍及一些业务场景的应用">
+<meta name="twitter:description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。举个例子：
+
+
+snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。
+简书或者知乎app中，当视图上下滚动后，toolbar以及b">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wangwenbo.xyz/2016/11/26/2016-11-26-behavior/"/>
+
+
+
+
+
+  <title> Behavior介绍及一些业务场景的应用 | hilo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">hilo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'tKyP9rq9V_mkpEcDEFbz','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://wangwenbo.xyz/2016/11/26/2016-11-26-behavior/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="hilo">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="hilo's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="hilo's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Behavior介绍及一些业务场景的应用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-26T19:00:00+08:00">
+                2016-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/26/2016-11-26-behavior/" class="leancloud_visitors" data-flag-title="Behavior介绍及一些业务场景的应用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？<br>假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。<br>举个例子：</p>
+<blockquote>
+<ol>
+<li>snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。</li>
+<li>简书或者知乎app中，当视图上下滚动后，toolbar以及bottombar做一些隐藏与显示的操作。</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>1、Behavior必须依赖于CoordinatorLayout控件</p>
+<p>2、在考虑到一些特定的需求时，例如各个view之间的交互，CoordinatorLayout控件就显得尤为重要了。CoordinatorLayout主要是用来协调其下各个子view们之间的动作，而Behavior是用来给CoordinatorLayout的所有子view们实现交互的。</p>
+<h2 id="系统提供的Behavior"><a href="#系统提供的Behavior" class="headerlink" title="系统提供的Behavior"></a>系统提供的Behavior</h2><p><code>app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;</code></p>
+<p>这个属性，用来配合CoordinatorLayout与AppBarLayout使用的。</p>
+<h3 id="模拟业务场景："><a href="#模拟业务场景：" class="headerlink" title="模拟业务场景："></a>模拟业务场景：</h3><p>当视图向下滚动时，伴随着toolbar隐藏TabLayout悬挂在顶部的业务实现 </p>
+<p>为了使toolbar具有滑动效果一定要满足以下4点才可以哦：</p>
+<ol>
+<li>CoordinatorLayout作为布局的父布局容器。 </li>
+<li>给<strong>需要滑动</strong>的组件设置 <code>app:layout_scrollFlags=&quot;scroll|enterAlways&quot;</code> 属性。 </li>
+<li>给<strong>滑动</strong>的组件设置<code>app:layout_behavior</code>属性</li>
+<li>Toolbar外层必须包裹着<code>android.support.design.widget.AppBarLayout</code>控件，才会有<code>app:layout_scrollFlags</code>属性。</li>
+</ol>
+<p>为了使TabLayout悬挂在顶部要满足以下条件才可以哦：</p>
+<ol>
+<li>不能添加<code>app:layout_scrollFlags=&quot;scroll&quot;</code>属性</li>
+<li>tabLayout外层必须包裹着<code>android.support.design.widget.AppBarLayout</code>控件。</li>
+</ol>
+<p>最后为了满足以上俩点，必须在CoordinatorLayout里搞一个可以滑动的子控件，并添加<code>app:layout_behavior</code>属性。例如recyclerView。</p>
+<h2 id="自定义Behavior"><a href="#自定义Behavior" class="headerlink" title="自定义Behavior"></a>自定义Behavior</h2><p>CoordinatorLayout功能如此强大，而他的神奇之处在于Behavior对象，CoordinatorLayout自己并不控制View，所有的控制权都在Behavior。<br>系统已经写好了几个Behavior给我们，常用的都有哪些呢？</p>
+<ol>
+<li>FloatingActionButton.Behavior，FloatingActionButton默认使用的就是该Behavior。配合SnackBar可以做到当snakeBar弹出时，随着snakeBar上移一段距离。</li>
+<li>AppBarLayout.Behavior 和 AppBarLayout.ScrollingViewBehavior，AppBarLayout中有两个Behavior，一个是拿来给它自己用的，另一个则是拿来给滑动的组件设置的。你的自定义View类上添加@DefaultBehavior(你的Behavior.class)这句注解。你的View就默认使用这个Behavior。就像AppBarLayout一样。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@DefaultBehavior</span>(AppBarLayout.Behavior.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppBarLayout</span> <span class="keyword">extends</span> <span class="title">LinearLayout</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="如何自定义Behavior"><a href="#如何自定义Behavior" class="headerlink" title="如何自定义Behavior"></a>如何自定义Behavior</h3><ol>
+<li>首先写一个类继承自CoordinatorLayout.Behavior，并重写俩个参数的构造方法（底层实现是通过反射俩个参数的构造方法）。</li>
+<li>重写俩个方法：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">layoutDependsOn</span><span class="params">(CoordinatorLayout parent, View child, View dependency)</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDependentViewChanged</span><span class="params">(CoordinatorLayout parent, View child, View dependency)</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第一个方法layoutDependsOn是用来确定依赖哪些View，CoordinatorLayout会将自己所有View遍历来判断，生成Behavior后第一件事就是确定依赖关系。形式参数child是指添加<code>app：layout_behavior</code>的view，参数dependency担任触发Behavior的角色，这个参数很重要，并与child进行互动。返回true后才会匹配到该依赖的view。<br>第二个方法onDependentViewChanged，当所依赖的View变动时会回调该方法。</p>
+<h3 id="常见的用法："><a href="#常见的用法：" class="headerlink" title="常见的用法："></a>常见的用法：</h3><ul>
+<li><p><strong>点击FloatingActionButton点击旋转90度，并适配Snackbar。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">layoutDependsOn</span><span class="params">(CoordinatorLayout parent, FloatingActionButton child, View dependency)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> dependency <span class="keyword">instanceof</span> Snackbar.SnackbarLayout;</div><div class="line">  	&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDependentViewChanged</span><span class="params">(CoordinatorLayout parent, FloatingActionButton child, View dependency)</span> </span>&#123;</div><div class="line">       <span class="keyword">float</span> translationY = getFabTranslationYForSnackbar(parent, child);</div><div class="line">       <span class="keyword">float</span> percentComplete = -translationY / dependency.getHeight();</div><div class="line">       child.setRotation(-<span class="number">90</span> * percentComplete);</div><div class="line">       child.setTranslationY(translationY);</div><div class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">float</span> <span class="title">getFabTranslationYForSnackbar</span><span class="params">(CoordinatorLayout parent,</span></span></div><div class="line">                                               FloatingActionButton fab) &#123;</div><div class="line">       <span class="keyword">float</span> minOffset = <span class="number">0</span>;</div><div class="line">       <span class="keyword">final</span> List&lt;View&gt; dependencies = parent.getDependencies(fab);</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, z = dependencies.size(); i &lt; z; i++) &#123;</div><div class="line">           <span class="keyword">final</span> View view = dependencies.get(i);</div><div class="line">           <span class="keyword">if</span> (view <span class="keyword">instanceof</span> Snackbar.SnackbarLayout &amp;&amp; parent.doViewsOverlap(fab, view)) &#123;</div><div class="line">               minOffset = Math.min(minOffset,</div><div class="line">                       ViewCompat.getTranslationY(view) - view.getHeight());</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">return</span> minOffset;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>  最后在xml文件中FloatingActionButton控件上添加app：layout_behavior=””属性</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>知乎中或者简书app中，根据视图滑动的距离来决定是否显示底部的bottomBar</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStartNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, <span class="keyword">int</span> nestedScrollAxes)</span> </span>&#123;</div><div class="line">	<span class="comment">// 只有一种情况返回true：当前滑动的方向是垂直滑动</span></div><div class="line">       <span class="keyword">return</span> (nestedScrollAxes &amp; ViewCompat.SCROLL_AXIS_VERTICAL) != <span class="number">0</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNestedPreScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy, <span class="keyword">int</span>[] consumed)</span> </span>&#123;</div><div class="line">	<span class="comment">// 根据滑动的距离来决定显示与隐藏bottomBar</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  最后在xml文件里在bottomBar控件上添加app：layout_behavior=””属性</p>
+</li>
+</ul>
+<ul>
+<li><strong>一个view根据另一个view的垂直移动距离，自身做一些位置变化或者随着另一个view一起移动等等业务场景</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStartNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, <span class="keyword">int</span> nestedScrollAxes)</span> </span>&#123;</div><div class="line">	<span class="comment">// 都是通过该形参dependency来确定依赖的view的。</span></div><div class="line">       <span class="keyword">return</span> dependency.getId() == R.id.xxx;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Behavior滑动时，几个比较重要的回调"><a href="#Behavior滑动时，几个比较重要的回调" class="headerlink" title="Behavior滑动时，几个比较重要的回调"></a>Behavior滑动时，几个比较重要的回调</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onStartNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, 	View target, <span class="keyword">int</span> nestedScrollAxes)</span> </span>&#123;</div><div class="line">	<span class="comment">// 1. 滑动事件触发后，第一个触发的回调，该方法必须返回true后才会继而触发其他的回调方法。</span></div><div class="line">   	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNestedScroll</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target, <span class="keyword">int</span> dxConsumed, 	<span class="keyword">int</span> dyConsumed, <span class="keyword">int</span> dxUnconsumed, <span class="keyword">int</span> dyUnconsumed)</span> </span>&#123;</div><div class="line">	<span class="comment">//2. 滑动事件集中处理的回调方法</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onNestedFling</span><span class="params">(CoordinatorLayout coordinatorLayout, View child, View target, <span class="keyword">float</span> velocityX, 	<span class="keyword">float</span> velocityY, <span class="keyword">boolean</span> consumed)</span> </span>&#123;</div><div class="line">	<span class="comment">//3. 当进行快速滑动时，会触发该回调方法。</span></div><div class="line">   	<span class="keyword">return</span> <span class="keyword">super</span>.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>注意被依赖的View只有实现了NestedScrollingChild接口的才可以将事件传递给CoordinatorLayout。由于该接口是属于NestedScrollView的，所以只要CoordinatorLayout下存在NestedScrollingChild控件就可以满足该条件</strong></p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="什么是CollapsingToolbarLayout？"><a href="#什么是CollapsingToolbarLayout？" class="headerlink" title="什么是CollapsingToolbarLayout？"></a>什么是CollapsingToolbarLayout？</h3><p>简单来讲，CollapsingToolbarLayout是实现一个可以折叠的Toolbar，作为AppbarLayout的直接子View使用。</p>
+<h3 id="常见属性"><a href="#常见属性" class="headerlink" title="常见属性"></a>常见属性</h3><p><code>app:layout_collapseMode=&quot;&quot;</code></p>
+<p>COLLAPSE_MODE_OFF：对滚动事件不做任何处理。<br>COLLAPSE_MODE_PIN：设置这个值，当CollapsingToolbarLayout完全折叠之后，Toolbar还会显示在屏幕上。<br>COLLAPSE_MODE_PARALLAX : 设置了这个属性以后，CollapsingToolbarLayout中的View（比如我们这里的ImageView)也会同时滚动，实现视差滚动效果，通常和layout_collapseParallaxMultiplier(设置视差因子)搭配使用。这里的滚动视觉差，意思就是，你设置了0那么就会图片一起滚动，你设置了1那么，图片是不会滚动的（范围0~1之间）。</p>
+<p><code>app:contentScrim=&quot;&quot;</code></p>
+<p>当滚出屏幕（完全折叠后）时，CollapsingToolbarLayout的背景颜色，需要是一个颜色值，对应JAVA方法是setContentScrimResource(int)</p>
+<p><code>app:expandedTitleMargin=&quot;&quot;</code>、<code>app:expandedTitleMarginBottom=&quot;&quot;</code>、<code>app:expandedTitleMarginEnd=&quot;&quot;</code>、<code>app:expandedTitleMarginStart=&quot;&quot;</code>、<code>app:expandedTitleMarginTop=&quot;&quot;</code></p>
+<p>这5个属性都是设置标题的margin值的。</p>
+<p><code>app:layout_scrollFlags=&quot;&quot;</code></p>
+<p>被appBarLayout的包裹后才拥有的属性，这里有俩个专门为CollapseToolbarLayout打造的属性，enterAlwaysCollapsed(当你的View已经设置minHeight属性又使用此标志时，你的View只能以最小高度进入，只有当滚动视图到达顶部时才扩大到完整高度。) 和 exitUntilCollapsed(折叠的时候固定Toolbar)</p>
+<p><code>app:expandedTitleGravity=&quot;&quot;</code></p>
+<p>布局没有折叠的时候标题栏的位置，与app:collapsedTitleGravity=””布局折叠时候标题栏的位置，设置多个值得时候用“|”分割，对应Java方法是：setExpandedTitleGravity(int)</p>
+<p><code>app:expandedTitleTextAppearance=&quot;&quot;</code></p>
+<p>这个属性跟app:collapsedTitleTextAppearance=”属性对应，是设置展开的时候标题栏文本的外观，对应的Java方法是：setExpandedTitleTextAppearance(int)</p>
+<p><code>app:statusBarScrim=&quot;@android:color/transparent&quot;</code></p>
+<p>如果你拖动过程中希望状态栏透明，可以增加该属性。仅限Android5.0以上系统。</p>
+<p><code>app:title=&quot;&quot;</code>设置标题 和 <code>app:titleEnabled=&quot;&quot;</code>属性，是否显示标题，对应Java方法是：setTitleEnabled(boolean)</p>
+<p><strong>xml文件</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.CoordinatorLayout</span></span></div><div class="line">	<span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">	<span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">	<span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">	<span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">	<span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/main.appbar"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"300dp"</span></div><div class="line">    <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.CollapsingToolbarLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/collapsing_toolbar_layout"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">app:contentScrim</span>=<span class="string">"#30469b"</span></div><div class="line">        <span class="attr">app:expandedTitleMarginStart</span>=<span class="string">"48dp"</span></div><div class="line">        <span class="attr">app:layout_scrollFlags</span>=<span class="string">"scroll|exitUntilCollapsed"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_bg"</span></div><div class="line">            <span class="attr">app:layout_collapseMode</span>=<span class="string">"parallax"</span></div><div class="line">            <span class="attr">app:layout_collapseParallaxMultiplier</span>=<span class="string">"0.7"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/ctl_toolbar"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"?attr/actionBarSize"</span></div><div class="line">            <span class="attr">app:layout_collapseMode</span>=<span class="string">"pin"</span></div><div class="line">            <span class="attr">app:titleTextColor</span>=<span class="string">"#FFFFFF"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.design.widget.CollapsingToolbarLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.NestedScrollView</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.CardView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_margin</span>=<span class="string">"8dp"</span></div><div class="line">        <span class="attr">app:cardCornerRadius</span>=<span class="string">"5dp"</span></div><div class="line">        <span class="attr">app:cardElevation</span>=<span class="string">"5dp"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:padding</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"@string/custom_text"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"16sp"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.v7.widget.CardView</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.v4.widget.NestedScrollView</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.FloatingActionButton</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/ctl_fab"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_margin</span>=<span class="string">"@dimen/activity_horizontal_margin"</span></div><div class="line">    <span class="attr">android:src</span>=<span class="string">"@drawable/ic_comment_24dp"</span></div><div class="line">    <span class="attr">app:layout_anchor</span>=<span class="string">"@id/main.appbar"</span></div><div class="line">    <span class="attr">app:layout_anchorGravity</span>=<span class="string">"bottom|right|end"</span>/&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>CoordinatorLayout 还提供了一个 <code>layout_anchor</code> 的属性，连同 <code>layout_anchorGravity</code> 一起，可以用来放置与其他视图关联在一起的悬浮视图（如 FloatingActionButton）。本例中使用FloatingActionButton。通过下面的参数设置了FloatingActionButton的位置，两个属性共同作用使得FAB 浮动按钮也能折叠消失，展现。</p>
+<p><strong>使用CollapsingToolbarLayout实现折叠效果，需要注意3点</strong> </p>
+<ol>
+<li>AppBarLayout的高度固定 </li>
+<li>CollapsingToolbarLayout的子视图设置layout_collapseMode属性 </li>
+<li>关联悬浮视图设置app:layout_anchor， app:layout_anchorGravity属性</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>behavior的出现，解决了一些常见的业务场景中，复杂动画的简单实现方式。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li>android-doc</li>
+<li>android源码提供的sample</li>
+</ul>
+<p><a href="http://wangwenbo.xyz/2016/11/26/2016-11-26-behavior/">本文地址</a></p>
+<blockquote>
+<p><a href="http://wangwenbo.xyz/2016/11/26/2016-11-26-behavior/">http://wangwenbo.xyz/2016/11/26/2016-11-26-behavior/</a></p>
+</blockquote>
+<h3 id="著作权归作者所有"><a href="#著作权归作者所有" class="headerlink" title="著作权归作者所有"></a>著作权归作者所有</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/28/2016-11-28-view-and-viewgroup/" rel="prev" title="初探view与viewgroup">
+                初探view与viewgroup <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="hilo" />
+          <p class="site-author-name" itemprop="name">hilo</p>
+          <p class="site-description motion-element" itemprop="description">我最担心的是，你可能认为我是个好人…</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统提供的Behavior"><span class="nav-number">1.1.</span> <span class="nav-text">系统提供的Behavior</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟业务场景："><span class="nav-number">1.1.1.</span> <span class="nav-text">模拟业务场景：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Behavior"><span class="nav-number">1.2.</span> <span class="nav-text">自定义Behavior</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何自定义Behavior"><span class="nav-number">1.2.1.</span> <span class="nav-text">如何自定义Behavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的用法："><span class="nav-number">1.2.2.</span> <span class="nav-text">常见的用法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Behavior滑动时，几个比较重要的回调"><span class="nav-number">1.2.3.</span> <span class="nav-text">Behavior滑动时，几个比较重要的回调</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展"><span class="nav-number">1.3.</span> <span class="nav-text">拓展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是CollapsingToolbarLayout？"><span class="nav-number">1.3.1.</span> <span class="nav-text">什么是CollapsingToolbarLayout？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见属性"><span class="nav-number">1.3.2.</span> <span class="nav-text">常见属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#著作权归作者所有"><span class="nav-number">3.0.1.</span> <span class="nav-text">著作权归作者所有</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hilo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("D9Ui8XJeq8hkdjXNfiHRV5J0-gzGzoHsz", "49JioX7UzYcHkYRJGrnV1yvj");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
