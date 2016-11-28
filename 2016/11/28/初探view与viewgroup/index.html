@@ -82,21 +82,18 @@
 
 
 
-<meta name="description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。
-下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
+<meta name="description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
 前言1、android.view.View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初探view与viewgroup">
 <meta property="og:url" content="http://wangwenbo.xyz/2016/11/28/初探view与viewgroup/index.html">
 <meta property="og:site_name" content="hilo's blog">
-<meta property="og:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。
-下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
+<meta property="og:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
 前言1、android.view.View">
-<meta property="og:updated_time" content="2016-11-28T09:57:41.570Z">
+<meta property="og:updated_time" content="2016-11-28T10:14:03.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探view与viewgroup">
-<meta name="twitter:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。
-下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
+<meta name="twitter:description" content="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。
 前言1、android.view.View">
 
 
@@ -319,7 +316,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T17:42:32+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T18:02:21+08:00">
                 2016-11-28
               </time>
             
@@ -364,8 +361,8 @@
       
 
       
-        <p>本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。</p>
-<p>下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。</p>
+        <hr>
+<h2 id="本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。"><a href="#本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。" class="headerlink" title="本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。"></a>本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。</h2><hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>1、android.view.View </p>
 <blockquote>
 <p>The Android framework is responsible for measuring, laying out and drawing views。</p>
@@ -636,6 +633,13 @@ setMeasureDimension(realWidth, heightVal）;
           
 
           
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
 
         </nav>
 
@@ -666,7 +670,7 @@ setMeasureDimension(realWidth, heightVal）;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">2.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View是怎么呈现在界面上的？"><span class="nav-number">3.</span> <span class="nav-text">View是怎么呈现在界面上的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View绘制过程及3个布局回调"><span class="nav-number">4.</span> <span class="nav-text">View绘制过程及3个布局回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景演示"><span class="nav-number">4.1.</span> <span class="nav-text">场景演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onDraw-android-graphics-Canvas-呈现视图内容"><span class="nav-number">5.</span> <span class="nav-text">onDraw(android.graphics.Canvas) 呈现视图内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#著作权归作者所有"><span class="nav-number">7.1.</span> <span class="nav-text">著作权归作者所有</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本篇来讲讲-view与viewgroup-是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。"><span class="nav-number">1.</span> <span class="nav-text">本篇来讲讲 view与viewgroup 是怎么呈现在界面上的，以及在创建过程中涉及到的几个重要方法onMeasure、onSizeChanged、onLayout存在的意义，当然还有关于LinearLayout和RelativeLayout所涉及到的性能问题及使用上的一些建议。下一篇会根据此篇章内容，写几个小demo，尽可能的让大家理解更深刻一些。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建"><span class="nav-number">3.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View是怎么呈现在界面上的？"><span class="nav-number">4.</span> <span class="nav-text">View是怎么呈现在界面上的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View绘制过程及3个布局回调"><span class="nav-number">5.</span> <span class="nav-text">View绘制过程及3个布局回调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景演示"><span class="nav-number">5.1.</span> <span class="nav-text">场景演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#onDraw-android-graphics-Canvas-呈现视图内容"><span class="nav-number">6.</span> <span class="nav-text">onDraw(android.graphics.Canvas) 呈现视图内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#著作权归作者所有"><span class="nav-number">8.1.</span> <span class="nav-text">著作权归作者所有</span></a></li></ol></li></ol></div>
             
 
           </div>

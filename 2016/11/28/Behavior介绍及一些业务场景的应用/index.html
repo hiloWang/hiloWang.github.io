@@ -82,34 +82,28 @@
 
 
 
-<meta name="description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？ 
-假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。
-举个例子：
+<meta name="description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。举个例子：
 
 
 snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。
-简书或者知乎app中，当视图上下滚动后，toolbar">
+简书或者知乎app中，当视图上下滚动后，toolbar以及">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Behavior介绍及一些业务场景的应用">
 <meta property="og:url" content="http://wangwenbo.xyz/2016/11/28/Behavior介绍及一些业务场景的应用/index.html">
 <meta property="og:site_name" content="hilo's blog">
-<meta property="og:description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？ 
-假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。
-举个例子：
+<meta property="og:description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。举个例子：
 
 
 snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。
-简书或者知乎app中，当视图上下滚动后，toolbar">
-<meta property="og:updated_time" content="2016-11-28T09:51:43.251Z">
+简书或者知乎app中，当视图上下滚动后，toolbar以及">
+<meta property="og:updated_time" content="2016-11-28T10:15:17.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Behavior介绍及一些业务场景的应用">
-<meta name="twitter:description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？ 
-假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。
-举个例子：
+<meta name="twitter:description" content="本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。举个例子：
 
 
 snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。
-简书或者知乎app中，当视图上下滚动后，toolbar">
+简书或者知乎app中，当视图上下滚动后，toolbar以及">
 
 
 
@@ -331,7 +325,7 @@ snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消�
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T17:42:32+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-28T18:02:21+08:00">
                 2016-11-28
               </time>
             
@@ -376,15 +370,15 @@ snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消�
       
 
       
-        <p>本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？ </p>
-<p>假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。</p>
-<p>举个例子：</p>
+        <hr>
+<p>本篇来讲讲 behavior 的基本使用以及它的出现为我们带来了哪些方便呢？<br>假设你有一种想法，通过视图的上下滚动或者左右滑动来让其他view配合做一些事情，并看起来很协调，那么behavior是你尽可能的优先选择。<br>举个例子：</p>
 <blockquote>
 <ol>
 <li>snackbar底部弹出后，fab在原本的位置上移一段距离，snackbar消失后fab又回到原本的位置上。</li>
 <li>简书或者知乎app中，当视图上下滚动后，toolbar以及bottombar做一些隐藏与显示的操作。</li>
 </ol>
 </blockquote>
+<hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>1、Behavior必须依赖于CoordinatorLayout控件</p>
 <p>2、在考虑到一些特定的需求时，例如各个view之间的交互，CoordinatorLayout控件就显得尤为重要了。CoordinatorLayout主要是用来协调其下各个子view们之间的动作，而Behavior是用来给CoordinatorLayout的所有子view们实现交互的。</p>
 <h2 id="系统提供的Behavior"><a href="#系统提供的Behavior" class="headerlink" title="系统提供的Behavior"></a>系统提供的Behavior</h2><blockquote>
@@ -730,6 +724,13 @@ public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, Vi
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
